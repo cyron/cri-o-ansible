@@ -231,6 +231,14 @@
           value: '"untrusted"'
           path: /etc/crio/crio.conf
       when: runtime == "cc-oci-runtime"
+      
+    - name: crio proxy
+      copy:
+        content: |
+              HTTP_PROXY=http://proxy.rdh.ecl.ntt.co.jp:20066
+              HTTPS_PROXY=http://proxy.rdh.ecl.ntt.co.jp:20066
+        dest: /etc/sysconfig/crio
+        force: yes
 
     - name: enable and start CRI-O
       systemd:
