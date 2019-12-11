@@ -116,7 +116,6 @@
         state: directory
       with_items:
            - /usr/local/go
-           - /etc/systemd/system/kubelet.service.d/
            - /var/lib/etcd
            - /etc/crio/net.d
            - /usr/share/containers/oci/hooks.d
@@ -298,17 +297,11 @@
         content: "KUBELET_EXTRA_ARGS=--feature-gates=\"AllAlpha=false,RunAsGroup=true\" --container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint='unix:///var/run/crio/crio.sock' --runtime-request-timeout=5m"
         force: yes
         dest: /etc/default/kubelet
-
-    - name: systemd dropin for kubeadm
-      copy:
-        content: |
-              [Service]
-              Environment=/etc/default/kubelet
-        dest: /etc/systemd/system/kubelet.service.d/0-crio.conf
-        force: yes
-
-    - name: just force systemd to reread configs
+        
+    - name: enable kubelet
       systemd:
+        name: kubelet
+        enabled: yes
         daemon_reload: yes
 
     - name: flush iptables
