@@ -253,11 +253,13 @@
 
     - name: tune sysctl
       lineinfile:
-        line: "net/bridge/bridge-nf-call-iptables = 1"
         dest: /etc/sysctl.conf
         insertafter: 'EOF'
-        regexp: '\/net\/bridge\/bridge-nf-call-iptables = 1'
-        state: present
+        line: '{{ item }}'
+      with_items:
+        - 'net/bridge/bridge-nf-call-iptables  = 1'
+        - 'net.ipv4.ip_forward                 = 1'
+        - 'net.bridge.bridge-nf-call-ip6tables = 1'
       ignore_errors: true
 
     - name: reload sysctl
