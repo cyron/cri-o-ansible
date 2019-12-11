@@ -256,6 +256,7 @@
         line: 'br_netfilter'
         dest: /etc/modules-load.d/br_netfilter.conf
         insertafter: 'EOF'
+        create: 'yes'
       ignore_errors: true
       
     - name: modprobe overlay
@@ -267,6 +268,7 @@
         line: 'overlay'
         dest: /etc/modules-load.d/overlay.conf
         insertafter: 'EOF'
+        create: 'yes'
       ignore_errors: true
 
     - name: tune sysctl
