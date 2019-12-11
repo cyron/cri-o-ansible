@@ -250,6 +250,24 @@
     - name: modprobe br_netfilter
       command: "modprobe br_netfilter"
       ignore_errors: true
+      
+    - name: modprobe br_netfilter 2
+      lineinfile:
+        line: 'br_netfilter'
+        dest: /etc/modules-load.d/br_netfilter.conf
+        insertafter: 'EOF'
+      ignore_errors: true
+      
+    - name: modprobe overlay
+      command: "modprobe overlay"
+      ignore_errors: true
+      
+    - name: modprobe overlay 2
+      lineinfile:
+        line: 'overlay'
+        dest: /etc/modules-load.d/overlay.conf
+        insertafter: 'EOF'
+      ignore_errors: true
 
     - name: tune sysctl
       lineinfile:
