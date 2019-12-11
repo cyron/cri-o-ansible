@@ -190,6 +190,13 @@
         name: /etc/crio/crio.conf
         backup: yes
       when: ansible_distribution in ['Fedora', 'RedHat', 'CentOS']
+      
+    - name: change cni net.d
+      replace:
+        regexp: 'network_dir = "\/etc\/cni\/net\.d/"'
+        replace: 'network_dir = "/etc/crio/net.d/"'
+        name: /etc/crio/crio.conf
+        backup: yes
 
     - name: run with overlay2
       replace:
