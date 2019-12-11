@@ -1,6 +1,10 @@
 ---
 - hosts: all
   become: true
+  vars:
+    proxy_env:
+      http_proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
+      https_proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
   tasks:
     - include: install/os_updates.yml
     - include: install/kubernetes.yml
@@ -114,7 +118,8 @@
            - /usr/local/go
            - /etc/systemd/system/kubelet.service.d/
            - /var/lib/etcd
-           - /etc/cni/net.d
+           - /etc/crio/net.d
+           - /usr/share/containers/oci/hooks.d
            - /etc/containers
 
     - name: clone runc
@@ -199,6 +204,7 @@
         replace: 'cgroup_manager = "cgroupfs"'
         name: /etc/crio/crio.conf
         backup: yes
+      when: ansible_distribution not in ['Fedora', 'RedHat', 'CentOS']
 
     - name: add overlay2 storage opts on RHEL/CentOS
       lineinfile:
@@ -252,7 +258,7 @@
 
     - name: kubelet_extra_args copied to /etc/default/kubelet
       copy:
-        content: "KUBELET_EXTRA_ARGS=--feature-gates=\"AllAlpha=false,RunAsGroup=true\" --container-runtime=remote --cgroup-driver=cgroupfs --container-runtime-endpoint='unix:///var/run/crio/crio.sock' --runtime-request-timeout=5m"
+        content: "KUBELET_EXTRA_ARGS=--feature-gates=\"AllAlpha=false,RunAsGroup=true\" --container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint='unix:///var/run/crio/crio.sock' --runtime-request-timeout=5m"
         force: yes
         dest: /etc/default/kubelet
 
