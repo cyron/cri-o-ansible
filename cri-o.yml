@@ -4,6 +4,7 @@
   environment:
     http_proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
     https_proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
+    no_proxy: 127.0.0.1,localhost,master,node1,node2,10.0.2.11,10.0.2.12,10.0.2.13,10.0.0.0/8
   tasks:
     - include: install/os_updates.yml
     - include: install/kubernetes.yml
