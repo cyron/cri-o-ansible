@@ -295,7 +295,7 @@
     - name: kubelet_extra_args copied to /etc/sysconfig/kubelet
       replace:
         regexp: 'KUBELET_EXTRA_ARGS='
-        replace: 'KUBELET_EXTRA_ARGS=--feature-gates=\"AllAlpha=false,RunAsGroup=true\" --container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint='unix:///var/run/crio/crio.sock' --runtime-request-timeout=5m'
+        replace: "KUBELET_EXTRA_ARGS=--feature-gates=\"AllAlpha=false,RunAsGroup=true\" --container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint='unix:///var/run/crio/crio.sock' --runtime-request-timeout=5m"
         name: /etc/sysconfig/kubelet
         backup: yes
         
