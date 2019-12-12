@@ -1,10 +1,9 @@
 ---
 - hosts: all
   become: true
-  vars:
-    proxy_env:
-      http_proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
-      https_proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
+  environment:
+    http_proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
+    https_proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
   tasks:
     - include: install/os_updates.yml
     - include: install/kubernetes.yml
