@@ -9,7 +9,6 @@
     - include: install/os_updates.yml
     - include: install/kubernetes.yml
     - include: install/golang.yml
-      when: runtime == "cc-oci-runtime"
 
     - name: Make sure we have all required packages on RHEL/CentOS
       yum:
