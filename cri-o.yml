@@ -39,12 +39,6 @@
         - wget
       when: ansible_distribution == 'Fedora'
 
-    - name: install Epel repository
-      yum:
-        name: epel-release
-        state: latest
-      when: ansible_distribution == 'CentOS'
-
     - name: Make sure we have all required packages on RHEL/CentOS
       yum:
         name: "{{ item }}"
