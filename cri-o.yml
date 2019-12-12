@@ -127,6 +127,12 @@
         replace: 'network_dir = "/etc/crio/net.d/"'
         name: /etc/crio/crio.conf
         backup: yes
+        
+    - name: download default network
+      get_url: 
+        url: https://raw.githubusercontent.com/cri-o/cri-o/master/contrib/cni/10-crio-bridge.conf
+        dest: /etc/crio/net.d/10-crio-bridge.conf
+        force: yes
 
     - name: run with overlay2
       replace:
