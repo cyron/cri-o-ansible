@@ -1,5 +1,5 @@
 # proxy setting
-cat >> /etc/profile << "EOF"
+cat >> /etc/profile << EOF
 export HTTP_PROXY=http://proxy.rdh.ecl.ntt.co.jp:20066/
 export HTTPS_PROXY=http://proxy.rdh.ecl.ntt.co.jp:20066/
 export NO_PROXY=127.0.0.1,localhost,master,node1,node2,10.0.2.11,10.0.2.12,10.0.2.13,10.0.0.0/8
